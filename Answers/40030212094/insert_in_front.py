@@ -88,17 +88,86 @@ def removeLastNode(head):
     second_last.next = None
     return head
 
+def search(head, x):
+ 
+        # Initialize current to head
+        current = head
+ 
+        # loop till current not equal to None
+        while current != None:
+            if current.data == x:
+                return True  # data found
+ 
+            current = current.next
+ 
+        return False  # Data Not found
 
+def clear(head):
+    head=None
 
+def getCount(head):
+        temp =  head# Initialise temp
+        count = 0  # Initialise count
+ 
+        # Loop while end of linked list is not reached
+        while (temp):
+            count += 1
+            temp = temp.next
+        return count
 
+def print_backward(head):
+        if head is None:
+            return
 
+        current = head
+        result = []
+        while current is not None:
+            result.append(str(current.data))
+            current = current.next
 
+        print(' '.join(result[::-1]))
+
+def reverse(head): 
+        prev = None
+        current = head
+
+        while current is not None:
+            next_node = current.next
+            current.next = prev
+            prev = current
+            current = next_node
+
+        head = prev
+def reverseUtil( curr, prev): 
+  
+        # If last node mark it head 
+        if curr.next is None: 
+            head = curr 
+  
+            # Update next to prev node 
+            curr.next = prev 
+            return
+  
+        # Save curr.next node for recursive call 
+        next = curr.next
+  
+        # And update next 
+        curr.next = prev 
+  
+        reverseUtil(next, curr) 
+  
+    # This function mainly calls reverseUtil() 
+    # with previous as None 
+  
+def reverse1(head): 
+        if head is None: 
+            return
+        reverseUtil(head, None) 
  
 # Driver code
 if __name__ == '__main__':
     # Start with the empty list
     head = None
- 
     head = insertAtFront(head, 6)
     head = insertAtFront(head, 5)
     head = insertAtFront(head, 4)
@@ -109,6 +178,23 @@ if __name__ == '__main__':
 
     head = removeFirstNode(head)
     head = removeLastNode(head)
+    # head=clear(head)
+    # reverse1(head)
+
+    x = 4
+ 
+    print(getCount(head))
+
+
+
+    # Function call
+    if search(head, 4):
+        print("Yes")
+    else:
+        print("No")
+
+        
 
     print("After inserting nodes at thier front: ", end="")
     printList(head)
+    print_backward(head)
